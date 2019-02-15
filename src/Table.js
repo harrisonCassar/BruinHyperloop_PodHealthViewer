@@ -52,14 +52,9 @@ class Table extends Component {
         return (
             <div>
                 <br />
-                <div class="title">
-                    Pod Health Viewer - UCLA Bruin Hyperloop
-                </div>
-                <br />
                 <table>
                     <TableHeader />
-                    <TableBody
-                    renderCell={(i) => this.renderCell(i)}/>
+                    <TableBody renderCell={(i) => this.renderCell(i)}/>
                 </table>
 
                 <UpdateButton
