@@ -1,32 +1,52 @@
 import React, {Component} from 'react';
+import {LabelCell, StaticCell, DynamicCell} from './Cell';
 
-function Cell(props) {
-  return (
-    <td class="othercol"
-    bgcolor={props.bgColor}>
-        {props.value}
-    </td>
-  )
-}
-
-//need to make a separate class for each cell, and render value as live render
 class Table extends Component {
     constructor(props) {
-    super(props);
-    this.state = {
-        minValues: Array(this.props.rows).fill(21),
-        maxValues: Array(this.props.rows).fill(35),
-      values: Array(this.props.rows).fill(25),
-      bgColors: Array(this.props.rows).fill('lime'),
-    };
-  }
+        super(props);
+        this.state = {
+            minValues: Array(this.props.rows).fill(null),
+            maxValues: Array(this.props.rows).fill(null),
+            labels: Array(this.props.rows).fill(null),
+            init: false,
 
-    renderCell(i) {
+            values: Array(this.props.rows).fill(2),
+            bgColors: Array(this.props.rows).fill('lime'),
+        };
+    }
+
+    renderDynamicCell(i) {
         return (
-            <Cell
+            <DynamicCell
                 value={this.state.values[i]}
                 bgColor={this.state.bgColors[i]}
-            />);
+            />
+        );
+    }
+
+    //type is either max or min
+    renderStaticCell(i,type) {
+        
+        let extremeValue = 0;
+        if (type === 'max' || type === 'maximum')
+            extremeValue = this.state.maxValues[i];
+        else if (type === 'min' || type === 'minimum')
+            extremeValue = this.state.minValues[i];
+
+        return (
+            <StaticCell
+                value={extremeValue}
+                bgColor={this.state.bgColors[i]}
+            />
+        );
+    }
+
+    renderLabelCell(i) {
+        return (
+            <LabelCell
+                label={this.state.labels[i]}
+            />
+        );
     }
 
     updateCell(i,newValue)
@@ -34,10 +54,10 @@ class Table extends Component {
         const updatedValues = this.state.values.slice();
         const updatedColors = this.state.bgColors.slice();
 
-        let newColor = 'yellow';
+        let newColor = 'lime';
 
-        //if (newValue < cell's minimum value || newValue > cell's maximum value) --> set new color to red
-        //NEED TO HAVE MAX/MIN VALUES STORED SOMEWHERE (i.e. in state/array) SO COLOR AUTOMATICALLY CHANGES WHEN RESPECTIVE VALUE IS CHANGING
+        if (newValue < this.state.minValues[i] || newValue > this.state.maxValues[i])
+            newColor = 'red';
         
         updatedValues[i] = newValue;
         updatedColors[i] = newColor;
@@ -49,17 +69,39 @@ class Table extends Component {
     }
 
     render() {
+        //wait for passed in custom min/max values or labels, will override (if none passed in, don't render table)
+        if (!this.props.minValues || !this.props.maxValues || !this.props.labels)
+            return null;
+        else if (this.state.init === false) {
+            this.setState({
+                minValues: this.props.minValues,
+                maxValues: this.props.maxValues,
+                labels: this.props.labels,
+
+                init: true,
+            });
+        }
+
         return (
             <div>
                 <br />
                 <table>
-                    <TableHeader />
-                    <TableBody renderCell={(i) => this.renderCell(i)}/>
+                    <TableHeader 
+                        tableLabel={this.props.tableLabel}
+                    />
+
+                    <TableBody
+                        rows={this.props.rows}
+                        renderLabelCell={(i) => this.renderLabelCell(i)}
+                        renderStaticCell={(i,type) => this.renderStaticCell(i,type)}
+                        renderDynamicCell={(i) => this.renderDynamicCell(i)}
+                    />
                 </table>
 
-                <UpdateButton
-                updateCell={(i,newValue) => this.updateCell(i,newValue)}/>
-
+                {/*button is added just for basic testing update cell functionality*/}
+                {/*<UpdateButton
+                    updateCell={(i,newValue) => this.updateCell(i,newValue)}
+                />*/}
             </div>
         );
     }
@@ -70,10 +112,10 @@ class TableHeader extends Component {
         return (
             <thead>
                 <tr>
-                    <th class="lcol"></th>
-                    <th class="othercol">Min</th>
-                    <th class="othercol">Actual</th>
-                    <th class="othercol">Max</th>
+                    <th className="lcol" bgcolor={'white'}>{this.props.tableLabel}</th>
+                    <th className="othercol" bgcolor={'white'}>Min</th>
+                    <th className="othercol" bgcolor={'white'}>Actual</th>
+                    <th className="othercol" bgcolor={'white'}>Max</th>
                 </tr>
             </thead>
         );
@@ -81,39 +123,30 @@ class TableHeader extends Component {
 }
 
 class TableBody extends Component {
+    
+    renderRow(i)
+    {
+        return (
+            <tr>
+                {this.props.renderLabelCell(i)}
+                {this.props.renderStaticCell(i,'min')}
+                {this.props.renderDynamicCell(i)}
+                {this.props.renderStaticCell(i,'max')}
+            </tr>
+        );
+    }
+
     render() {
+
+        let rows = [];
+
+        for (var i = 0; i < this.props.rows; i++) {
+            rows.push(this.renderRow(i));
+        }
+
         return (
             <tbody>
-                <tr>
-                    <td class="lcol">Temperature</td>
-                    <td class="othercol">20</td>
-                    {this.props.renderCell(0)}
-                    <td class="othercol">36</td>
-                </tr>
-                <tr>
-                    <td class="lcol">Motor 1 Current</td>
-                    <td class="othercol">20</td>
-                    {this.props.renderCell(1)}
-                    <td class="othercol">36</td>
-                </tr>
-                <tr>
-                    <td class="lcol">Motor 2 Current</td>
-                    <td class="othercol">20</td>
-                    {this.props.renderCell(2)}
-                    <td class="othercol">36</td>
-                </tr>
-                <tr>
-                    <td class="lcol">Motor 3 Current</td>
-                    <td class="othercol">20</td>
-                    {this.props.renderCell(3)}
-                    <td class="othercol">36</td>
-                </tr>
-                <tr>
-                    <td class="lcol">Motor 4 Current</td>
-                    <td class="othercol">20</td>
-                    {this.props.renderCell(4)}
-                    <td class="othercol">36</td>
-                </tr>
+                {rows}
             </tbody>
         );
     }

@@ -2,6 +2,17 @@ div.title {
   text-align: center;
   font-size: 200%;
   font-weight: 600;
+  text-shadow: 2px 2px 0px #000;
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+div.tableTitle {
+  text-align: center;
+  font-size: 125%;
+  text-decoration: underline;
+  text-shadow: 2px 2px 0px #000;
+  color: #FFFFFF;
 }
 
 th.lcol,
@@ -206,7 +217,7 @@ html {
 
 body {
   color: #404040;
-  background: white;
+  background-image: radial-gradient(circle, #2471A3, #1F618D, #1A5276, #154360);
   font-size: 1rem; }
 
 p,
@@ -654,7 +665,8 @@ table {
   width: 600px;
   margin: 0 auto;
   max-width: 100%;
-  table-layout: fixed; }
+  table-layout: fixed;
+  box-shadow: 8px 8px 20px #999; }
 
 thead th {
   border-bottom: 2px solid #dedede; }
