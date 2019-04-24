@@ -4,39 +4,30 @@ import {LabelCell, StaticCell, DynamicCell} from './Cell';
 class Table extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            minValues: Array(this.props.rows).fill(null),
-            maxValues: Array(this.props.rows).fill(null),
-            labels: Array(this.props.rows).fill(null),
-            init: false,
-
-            values: Array(this.props.rows).fill(2),
-            bgColors: Array(this.props.rows).fill('lime'),
-        };
     }
 
     renderDynamicCell(i) {
         return (
             <DynamicCell
-                value={this.state.values[i]}
-                bgColor={this.state.bgColors[i]}
+                value={this.props.values[i]}
+                bgColor={this.props.bgColors[i]}
             />
         );
     }
 
-    //type is either max or min
+    //type is either maximum or minimum
     renderStaticCell(i,type) {
         
         let extremeValue = 0;
         if (type === 'max' || type === 'maximum')
-            extremeValue = this.state.maxValues[i];
+            extremeValue = this.props.maxValues[i];
         else if (type === 'min' || type === 'minimum')
-            extremeValue = this.state.minValues[i];
+            extremeValue = this.props.minValues[i];
 
         return (
             <StaticCell
                 value={extremeValue}
-                bgColor={this.state.bgColors[i]}
+                bgColor={this.props.bgColors[i]}
             />
         );
     }
@@ -44,43 +35,15 @@ class Table extends Component {
     renderLabelCell(i) {
         return (
             <LabelCell
-                label={this.state.labels[i]}
+                label={this.props.labels[i]}
             />
         );
-    }
-
-    updateCell(i,newValue)
-    {
-        const updatedValues = this.state.values.slice();
-        const updatedColors = this.state.bgColors.slice();
-
-        let newColor = 'lime';
-
-        if (newValue < this.state.minValues[i] || newValue > this.state.maxValues[i])
-            newColor = 'red';
-        
-        updatedValues[i] = newValue;
-        updatedColors[i] = newColor;
-
-        this.setState({
-            values: updatedValues,
-            bgColors: updatedColors
-        })
     }
 
     render() {
         //wait for passed in custom min/max values or labels, will override (if none passed in, don't render table)
         if (!this.props.minValues || !this.props.maxValues || !this.props.labels)
             return null;
-        else if (this.state.init === false) {
-            this.setState({
-                minValues: this.props.minValues,
-                maxValues: this.props.maxValues,
-                labels: this.props.labels,
-
-                init: true,
-            });
-        }
 
         return (
             <div>
@@ -97,11 +60,6 @@ class Table extends Component {
                         renderDynamicCell={(i) => this.renderDynamicCell(i)}
                     />
                 </table>
-
-                {/*button is added just for basic testing update cell functionality*/}
-                {/*<UpdateButton
-                    updateCell={(i,newValue) => this.updateCell(i,newValue)}
-                />*/}
             </div>
         );
     }
@@ -148,18 +106,6 @@ class TableBody extends Component {
             <tbody>
                 {rows}
             </tbody>
-        );
-    }
-}
-
-class UpdateButton extends Component {
-    render() {
-        return (
-            <div>
-                <button onClick={() => this.props.updateCell(1,65)}>
-                    {"click me!"}
-                </button>
-            </div>
         );
     }
 }
