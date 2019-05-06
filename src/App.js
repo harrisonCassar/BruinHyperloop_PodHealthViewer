@@ -122,11 +122,6 @@ class App extends Component {
                     rows={5}
                 />
                 <br />
-
-                <button onClick={this.handleSubmit}>
-                    Test Button
-                </button>
-
             </div>
         );
     }
