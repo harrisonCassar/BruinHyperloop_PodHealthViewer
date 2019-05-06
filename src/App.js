@@ -122,6 +122,48 @@ class App extends Component {
                     rows={5}
                 />
                 <br />
+
+                <table className="separator">
+                    <tr>
+                        <td>
+                            <Table class="column"
+                                tableLabel="1"
+                                labels={this.state.tables[0].labels}
+                                minValues={this.state.tables[0].minValues}
+                                maxValues={this.state.tables[0].maxValues}
+                                values={this.state.tables[0].values}
+                                bgColors={this.state.tables[0].bgColors}
+                                rows={3}
+                            /> 
+                        </td>
+                        
+                    </tr>
+                </table>
+
+                <div class="row">
+                    <Table class="column"
+                        tableLabel="1"
+                        labels={this.state.tables[0].labels}
+                        minValues={this.state.tables[0].minValues}
+                        maxValues={this.state.tables[0].maxValues}
+                        values={this.state.tables[0].values}
+                        bgColors={this.state.tables[0].bgColors}
+                        rows={3}
+                    />
+
+                    <Table class="column"
+                        tableLabel="2"
+                        labels={this.state.tables[1].labels}
+                        minValues={this.state.tables[1].minValues}
+                        maxValues={this.state.tables[1].maxValues}
+                        values={this.state.tables[1].values}
+                        bgColors={this.state.tables[1].bgColors}
+                        rows={3}
+                    />
+                </div>
+
+
+
             </div>
         );
     }
