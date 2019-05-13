@@ -4,13 +4,13 @@
     margin:10px;
 }
 
-.leftchild {
+.leftcolumn {
   float: left;
   width: 50%;
   border:1px solid red;
 }
 
-.rightchild {
+.rightcolumn {
   float: right;
   width: 50%;
   border:1px solid red;
