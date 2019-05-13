@@ -85,63 +85,9 @@ class App extends Component {
                     Battery
                 </div>
 
-                <Table
-                    tableLabel="1"
-                    labels={this.state.tables[0].labels}
-                    minValues={this.state.tables[0].minValues}
-                    maxValues={this.state.tables[0].maxValues}
-                    values={this.state.tables[0].values}
-                    bgColors={this.state.tables[0].bgColors}
-                    rows={3}
-                />
-                <br />
-                <Table
-                    tableLabel="2"
-                    labels={this.state.tables[1].labels}
-                    minValues={this.state.tables[1].minValues}
-                    maxValues={this.state.tables[1].maxValues}
-                    values={this.state.tables[1].values}
-                    bgColors={this.state.tables[1].bgColors}
-                    rows={3}
-                />
-
-                <br />
-                <br />
-                <br />
-
-                <div className="tableTitle">
-                    Pod
-                </div>
-
-                <Table
-                    labels={this.state.tables[2].labels}
-                    minValues={this.state.tables[2].minValues}
-                    maxValues={this.state.tables[2].maxValues}
-                    values={this.state.tables[2].values}
-                    bgColors={this.state.tables[2].bgColors}
-                    rows={5}
-                />
-                <br />
-
-                <table className="separator">
-                    <tr>
-                        <td>
-                            <Table class="column"
-                                tableLabel="1"
-                                labels={this.state.tables[0].labels}
-                                minValues={this.state.tables[0].minValues}
-                                maxValues={this.state.tables[0].maxValues}
-                                values={this.state.tables[0].values}
-                                bgColors={this.state.tables[0].bgColors}
-                                rows={3}
-                            /> 
-                        </td>
-                        
-                    </tr>
-                </table>
-
-                <div class="row">
-                    <Table class="column"
+                <table class="parent">
+                    <div class="leftchild">
+                        <Table
                         tableLabel="1"
                         labels={this.state.tables[0].labels}
                         minValues={this.state.tables[0].minValues}
@@ -149,9 +95,9 @@ class App extends Component {
                         values={this.state.tables[0].values}
                         bgColors={this.state.tables[0].bgColors}
                         rows={3}
-                    />
+                        />
 
-                    <Table class="column"
+                        <Table
                         tableLabel="2"
                         labels={this.state.tables[1].labels}
                         minValues={this.state.tables[1].minValues}
@@ -159,11 +105,60 @@ class App extends Component {
                         values={this.state.tables[1].values}
                         bgColors={this.state.tables[1].bgColors}
                         rows={3}
-                    />
+                        />
+
+                    </div>
+                    <div class="rightchild">
+                        <Table
+                        tableLabel="1"
+                        labels={this.state.tables[0].labels}
+                        minValues={this.state.tables[0].minValues}
+                        maxValues={this.state.tables[0].maxValues}
+                        values={this.state.tables[0].values}
+                        bgColors={this.state.tables[0].bgColors}
+                        rows={3}
+                        />
+
+                        <Table
+                        tableLabel="2"
+                        labels={this.state.tables[1].labels}
+                        minValues={this.state.tables[1].minValues}
+                        maxValues={this.state.tables[1].maxValues}
+                        values={this.state.tables[1].values}
+                        bgColors={this.state.tables[1].bgColors}
+                        rows={3}
+                        />
+                    </div>
+                </table>
+
+                <br />
+
+                <div className="tableTitle">
+                    Pod
                 </div>
 
-
-
+                <table class="parent">
+                    <div class="leftchild">
+                        <Table
+                            labels={this.state.tables[2].labels}
+                            minValues={this.state.tables[2].minValues}
+                            maxValues={this.state.tables[2].maxValues}
+                            values={this.state.tables[2].values}
+                            bgColors={this.state.tables[2].bgColors}
+                            rows={5}
+                        />
+                    </div>
+                    <div class="rightchild">
+                        <Table
+                            labels={this.state.tables[2].labels}
+                            minValues={this.state.tables[2].minValues}
+                            maxValues={this.state.tables[2].maxValues}
+                            values={this.state.tables[2].values}
+                            bgColors={this.state.tables[2].bgColors}
+                            rows={5}
+                        />
+                    </div>
+                </table>
             </div>
         );
     }

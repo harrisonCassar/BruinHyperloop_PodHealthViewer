@@ -48,7 +48,7 @@ class Table extends Component {
         return (
             <div>
                 <br />
-                <table>
+                <table class="customtable">
                     <TableHeader 
                         tableLabel={this.props.tableLabel}
                     />
