@@ -44,30 +44,21 @@ class Table extends Component {
         );
     }
 
-    renderLabelCell(i) {
-        return (
-            <LabelCell
-                label={this.props.labels[i]}
-            />
-        );
-    }
-
     render() {
         //wait for passed in custom min/max values or labels, will override (if none passed in, don't render table)
-        if (!this.props.minValues || !this.props.maxValues || !this.props.labels)
+        if (!this.props.minValues || !this.props.maxValues)
             return null;
 
         return (
             <div>
                 <br />
-                <table class="customtable">
+                <table class="livetable">
                     <TableHeader 
                         tableLabel={this.props.tableLabel}
                     />
 
                     <TableBody
                         rows={this.props.rows}
-                        renderLabelCell={(i) => this.renderLabelCell(i)}
                         renderStaticCell={(i,type) => this.renderStaticCell(i,type)}
                         renderDynamicCell={(i) => this.renderDynamicCell(i)}
                     />
@@ -91,6 +82,28 @@ class OverallTable extends Component {
         );
     }
 
+    render() {
+        return (
+            <div>
+                <br />
+                <table class="overalltable">
+                    <OverallTableHeader />
+
+                    <OverallTableBody
+                        rows={this.props.rows}
+                        renderDynamicCell={(i,j) => this.renderDynamicCell(i,j)}
+                    />
+                </table>
+            </div>
+        );
+    }
+}
+
+class LabelTable extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     renderLabelCell(i) {
         return (
             <LabelCell
@@ -100,24 +113,59 @@ class OverallTable extends Component {
     }
 
     render() {
-        //wait for passed in custom min/max values or labels, will override (if none passed in, don't render table)
-        if (!this.props.minValues || !this.props.maxValues || !this.props.labels)
-            return null;
-
         return (
             <div>
                 <br />
-                <table class="customtable">
-                    <OverallTableHeader />
+                <table class="labeltable">
+                    <LabelTableHeader 
+                        tableLabel={this.props.tableLabel}
+                    />
 
-                    <OverallTableBody
+                    <LabelTableBody
                         rows={this.props.rows}
                         renderLabelCell={(i) => this.renderLabelCell(i)}
-                        renderStaticCell={(i,type) => this.renderStaticCell(i,type)}
-                        renderDynamicCell={(i,j) => this.renderDynamicCell(i,j)}
                     />
                 </table>
             </div>
+        );
+    }
+}
+
+class LabelTableHeader extends Component {
+    render() {
+        return (
+            <thead>
+                <tr>
+                    <th className="lcol" bgcolor={'white'}>{this.props.tableLabel}</th>
+                </tr>
+            </thead>
+        );
+    }
+}
+
+class LabelTableBody extends Component {
+    
+    renderRow(i)
+    {
+        return (
+            <tr>
+                {this.props.renderLabelCell(i)}
+            </tr>
+        );
+    }
+
+    render() {
+
+        let rows = [];
+
+        for (var i = 0; i < this.props.rows; i++) {
+            rows.push(this.renderRow(i));
+        }
+
+        return (
+            <tbody>
+                {rows}
+            </tbody>
         );
     }
 }
@@ -128,7 +176,7 @@ class OverallTableHeader extends Component {
             <thead>
                 <tr>
                     <th className="othercol" bgcolor={'white'}>Min</th>
-                    <th className="othercol" bgcolor={'white'}>Actual</th>
+                    <th className="othercol" bgcolor={'white'}>Average</th>
                     <th className="othercol" bgcolor={'white'}>Max</th>
                 </tr>
             </thead>
@@ -142,7 +190,6 @@ class OverallTableBody extends Component {
     {
         let row = [];
 
-        
         for (var j = 0; j < 3; j++)
             row.push(this.props.renderDynamicCell(i,j));
 
@@ -174,10 +221,9 @@ class TableHeader extends Component {
         return (
             <thead>
                 <tr>
-                    <th className="lcol" bgcolor={'white'}>{this.props.tableLabel}</th>
-                    <th className="othercol" bgcolor={'white'}>Min</th>
+                    <th className="othercol" bgcolor={'white'}>Min Threshold</th>
                     <th className="othercol" bgcolor={'white'}>Actual</th>
-                    <th className="othercol" bgcolor={'white'}>Max</th>
+                    <th className="othercol" bgcolor={'white'}>Max Threshold</th>
                 </tr>
             </thead>
         );
@@ -190,7 +236,6 @@ class TableBody extends Component {
     {
         return (
             <tr>
-                {this.props.renderLabelCell(i)}
                 {this.props.renderStaticCell(i,'min')}
                 {this.props.renderDynamicCell(i)}
                 {this.props.renderStaticCell(i,'max')}
@@ -214,4 +259,8 @@ class TableBody extends Component {
     }
 }
 
-export default Table;
+export {
+    Table,
+    OverallTable,
+    LabelTable
+}

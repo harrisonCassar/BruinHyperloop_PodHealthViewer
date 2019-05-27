@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Table from './Table';
+import {Table, OverallTable, LabelTable} from './Table';
 
 var tableNumbers = {
     "B1": 0,
@@ -23,7 +23,6 @@ var columnNumbers = {
     "Avg": 2,
 };
 
-
 //tableNum and rowNum starts at index 0
 function updateValue(tableString,newValue)
 {
@@ -36,8 +35,29 @@ class App extends Component {
         window.appComponent = this;
         this.state = {
 
-            //each index of tables array indicates different table; can have mapping function
+            //each index of tables array indicates different table
             //array indexes correspond to data's row numbers from 0 to n-1 rows
+            labeltables: [
+                {
+                    tableName: "Battery",
+                    tableLabel: "1",
+                    labels: ['Voltage','Current','Temperature'],
+                    rows: 3,
+                },
+                {
+                    tableName: "Battery",
+                    tableLabel: "2",
+                    labels: ['Voltage','Current','Temperature'],
+                    rows: 3,
+                },
+                {
+                    tableName: "Pod",
+                    tableLabel: "1",
+                    labels: ['Temperature','Motor 1 Current','Motor 2 Current','Motor 3 Current','Motor 4 Current'],
+                    rows: 5,
+                },
+            ],
+
             livetables: [
                 {
                     tableName: "Battery",
@@ -75,7 +95,6 @@ class App extends Component {
                 {
                     tableName: "Battery",
                     tableLabel: "1",
-                    labels: ['Min','Current','Temperature'],
                     rows: 3,
                     values: [
                         Array(3).fill(-1),
@@ -87,7 +106,6 @@ class App extends Component {
                 {
                     tableName: "Battery",
                     tableLabel: "2",
-                    labels: ['Voltage','Current','Temperature'],
                     rows: 3,
                     values: [
                         Array(3).fill(-1),
@@ -99,7 +117,6 @@ class App extends Component {
                 {
                     tableName: "Pod",
                     tableLabel: "",
-                    labels: ['Temperature','Motor 1 Current','Motor 2 Current','Motor 3 Current','Motor 4 Current'],
                     rows: 5,
                     values: [
                         Array(5).fill(-1),
@@ -200,47 +217,51 @@ class App extends Component {
                 </div>
 
                 <table class="parent">
-                    <div class="leftcolumn">
+                    <div class="labelcolumn">
+                        <LabelTable
+                        tableLabel={this.state.labeltables[0].tableLabel}
+                        labels={this.state.labeltables[0].labels}
+                        rows={this.state.labeltables[0].rows}
+                        />
+
+                        <LabelTable
+                        tableLabel={this.state.labeltables[1].tableLabel}
+                        labels={this.state.labeltables[1].labels}
+                        rows={this.state.labeltables[1].rows}
+                        />
+                    </div>
+
+                    <div class="pagecolumn">
                         <Table
-                        tableLabel="1"
-                        labels={this.state.livetables[0].labels}
+                        tableLabel={this.state.livetables[0].tableLabel}
                         minValues={this.state.livetables[0].minValues}
                         maxValues={this.state.livetables[0].maxValues}
                         values={this.state.livetables[0].values}
                         bgColors={this.state.livetables[0].bgColors}
-                        rows={3}
+                        rows={this.state.livetables[0].rows}
                         />
 
                         <Table
-                        tableLabel="2"
-                        labels={this.state.livetables[1].labels}
+                        tableLabel={this.state.livetables[1].tableLabel}
                         minValues={this.state.livetables[1].minValues}
                         maxValues={this.state.livetables[1].maxValues}
                         values={this.state.livetables[1].values}
                         bgColors={this.state.livetables[1].bgColors}
-                        rows={3}
+                        rows={this.state.livetables[1].rows}
                         />
-
                     </div>
-                    <div class="rightcolumn">
-                        <Table
-                        tableLabel="1"
-                        labels={this.state.overalltables[0].labels}
-                        minValues={this.state.overalltables[0].values[0]}
-                        maxValues={this.state.overalltables[0].values[1]}
-                        values={this.state.overalltables[0].values[2]}
+
+                    <div class="pagecolumn">
+                        <OverallTable
+                        values={this.state.overalltables[0].values}
                         bgColors={this.state.overalltables[0].bgColors}
-                        rows={3}
+                        rows={this.state.overalltables[0].rows}
                         />
 
-                        <Table
-                        tableLabel="2"
-                        labels={this.state.overalltables[1].labels}
-                        minValues={this.state.overalltables[1].values[0]}
-                        maxValues={this.state.overalltables[1].values[1]}
-                        values={this.state.overalltables[1].values[2]}
+                        <OverallTable
+                        values={this.state.overalltables[1].values}
                         bgColors={this.state.overalltables[1].bgColors}
-                        rows={3}
+                        rows={this.state.overalltables[1].rows}
                         />
                     </div>
                 </table>
@@ -252,7 +273,15 @@ class App extends Component {
                 </div>
 
                 <table class="parent">
-                    <div class="leftcolumn">
+                    <div class="labelcolumn">
+                        <LabelTable
+                        tableLabel={this.state.labeltables[2].tableLabel}
+                        labels={this.state.labeltables[2].labels}
+                        rows={this.state.labeltables[2].rows}
+                        />
+                    </div>
+
+                    <div class="pagecolumn">
                         <Table
                             labels={this.state.livetables[2].labels}
                             minValues={this.state.livetables[2].minValues}
@@ -262,12 +291,9 @@ class App extends Component {
                             rows={5}
                         />
                     </div>
-                    <div class="rightcolumn">
-                        <Table
-                            labels={this.state.overalltables[2].labels}
-                            minValues={this.state.overalltables[2].values[0]}
-                            maxValues={this.state.overalltables[2].values[1]}
-                            values={this.state.overalltables[2].values[2]}
+                    <div class="pagecolumn">
+                        <OverallTable
+                            values={this.state.overalltables[2].values}
                             bgColors={this.state.overalltables[2].bgColors}
                             rows={5}
                         />

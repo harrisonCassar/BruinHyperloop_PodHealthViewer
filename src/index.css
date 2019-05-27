@@ -1,23 +1,31 @@
 .parent {
     width:100%;
-    border:1px solid red;
+    border:0px solid red; /*for debugging purposes, change to 1px solid red */
     margin:10px;
 }
 
-.leftcolumn {
+.labelcolumn {
   float: left;
-  width: 50%;
-  border:1px solid red;
+  width: 16%;
+  border: 0px solid red;
 }
 
-.rightcolumn {
-  float: right;
-  width: 50%;
-  border:1px solid red;
+.pagecolumn {
+  float:left;
+  width:42%;
+  border: 0px solid red;
 }
 
-.customtable {
-  width: 525px;
+.labeltable {
+  width: 90%;
+}
+
+.livetable {
+  width: 90%;
+}
+
+.overalltable {
+  width: 90%;
 }
 
 div.title {
