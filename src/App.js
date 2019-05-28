@@ -19,8 +19,8 @@ var rowNumbers = {
 
 var columnNumbers = {
     "Min": 0,
-    "Max": 1,
-    "Avg": 2,
+    "Avg": 1,
+    "Max": 2,
 };
 
 //tableNum and rowNum starts at index 0
@@ -140,7 +140,7 @@ class App extends Component {
         let columnNum;
         let parsedTableString = tableString.split("_");
 
-        if (parsedTableString.length() != 3)
+        if (parsedTableString.length != 3)
         {
             console.log("Error: table string for update function is invalid.")
             return;
@@ -162,7 +162,7 @@ class App extends Component {
             return;
         }
         else
-            rowNum = tableNumbers[parsedTableString[1]];
+            rowNum = rowNumbers[parsedTableString[1]];
 
         //properly set columnNum
         if (parsedTableString[2] == "Actual")
@@ -182,7 +182,7 @@ class App extends Component {
         //update value and bgColor in state object
         if (modifyLive)
         {
-            if (newValue < this.state.livetables[tableNum].minValues[rowNum] || newValue > this.state.tables[tableNum].maxValues[rowNum])
+            if (newValue < this.state.livetables[tableNum].minValues[rowNum] || newValue > this.state.livetables[tableNum].maxValues[rowNum])
                 newColor = '#ff4d4d';
 
             updatedState.livetables[tableNum].values[rowNum] = newValue;
@@ -194,12 +194,11 @@ class App extends Component {
         }
 
         this.setState(updatedState);
-        
     }
 
     //handleSubmit function used by button as a functionality test method for the updateValue function
     handleSubmit(event) {
-        updateValue(0,1,56);
+        updateValue("B1_Voltage_Actual",30);
     }
 
     render() {
