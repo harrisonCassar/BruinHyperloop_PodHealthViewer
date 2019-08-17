@@ -177,7 +177,7 @@ td {
 .killButton {
   width: 92%;
   height: 90%;
-  border: none;
+  border: 1px solid #6b6b6b;
   background-color: #f02c1d;
   color: white;
   font-size: 70px;
@@ -189,7 +189,7 @@ td {
 .clearStatsButton {
   width: 90%;
   height: 80%;
-  border: none;
+  border: 1px solid #6b6b6b;
   background-color: #8c8c8c;
   color: white;
   font-size: 18px;
@@ -201,7 +201,7 @@ td {
 .downloadLogsButton {
   width: 90%;
   height: 80%;
-  border: none;
+  border: 1px solid #6b6b6b;
   background-color: #8c8c8c;
   color: white;
   font-size: 18px;

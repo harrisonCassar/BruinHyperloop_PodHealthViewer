@@ -3,6 +3,7 @@ import {Table, OverallTable, LabelTable} from './Table';
 import hyperloop_logo from './hyperloop_logo.png';
 import TI_logo from './TI_logo.png';
 
+//mappings for string parsing in updateCell
 var tableNumbers = {
     "B1": 0,
     "B2": 1,
@@ -29,6 +30,22 @@ var columnNumbers = {
 function updateValue(tableString,newValue)
 {
     window.appComponent.updateCell(tableString,newValue);
+}
+
+//onClick functionalities for custom buttons
+function killSystem()
+{
+    alert("KILL SYSTEMS!");
+}
+
+function clearStats()
+{
+    alert("CLEAR STATS!");
+}
+
+function downloadLogs()
+{
+    alert("DOWNLOAD LOGS!");
 }
 
 class App extends Component {
@@ -328,22 +345,19 @@ class App extends Component {
 
                 <table class="container" height="140px">
                     <div class="killButtonColumn">
-                        <button class="killButton" onClick={(i) => this.handleSubmit()}>KILL SWITCH</button>
+                        <button class="killButton" onClick={(i) => killSystem()}>KILL SWITCH</button>
                     </div>
 
                     <div class="statsButtonColumn">
                         <div class="statsButtonContainer">
-                            <button class="clearStatsButton" onClick={(i) => this.handleSubmit()}>Clear Statistics</button>
+                            <button class="clearStatsButton" onClick={(i) => clearStats()}>Clear Statistics</button>
                         </div>
 
                         <div class="statsButtonContainer">
-                            <button class="downloadLogsButton" onClick={(i) => this.handleSubmit()}>Download Logs</button>
+                            <button class="downloadLogsButton" onClick={(i) => downloadLogs()}>Download Logs</button>
                         </div>
                     </div>
-                    
                 </table>
-
-                
             </div>
         );
     }
