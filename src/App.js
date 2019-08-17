@@ -207,7 +207,7 @@ class App extends Component {
             	<br />
                 <br />
             	<div className="title">
-                    Pod Health Viewer - UCLA Bruin HYPErloop
+                    Bruin Hyperloop Web Dashboard 
                 </div>
                 <br />
 
@@ -217,6 +217,7 @@ class App extends Component {
 
                 <table class="parent">
                     <div class="labelcolumn">
+                        <br />
                         <LabelTable
                         tableLabel={this.state.labeltables[0].tableLabel}
                         labels={this.state.labeltables[0].labels}
@@ -231,6 +232,9 @@ class App extends Component {
                     </div>
 
                     <div class="pagecolumn">
+
+                        <br />
+
                         <Table
                         tableLabel={this.state.livetables[0].tableLabel}
                         minValues={this.state.livetables[0].minValues}
@@ -251,6 +255,10 @@ class App extends Component {
                     </div>
 
                     <div class="pagecolumn">
+                        <div className="tableSmallTitle">
+                            Statistics
+                        </div>
+
                         <OverallTable
                         values={this.state.overalltables[0].values}
                         bgColors={this.state.overalltables[0].bgColors}
@@ -273,6 +281,8 @@ class App extends Component {
 
                 <table class="parent">
                     <div class="labelcolumn">
+                        <br />
+
                         <LabelTable
                         tableLabel={this.state.labeltables[2].tableLabel}
                         labels={this.state.labeltables[2].labels}
@@ -281,6 +291,8 @@ class App extends Component {
                     </div>
 
                     <div class="pagecolumn">
+                        <br />
+
                         <Table
                             labels={this.state.livetables[2].labels}
                             minValues={this.state.livetables[2].minValues}
@@ -291,6 +303,10 @@ class App extends Component {
                         />
                     </div>
                     <div class="pagecolumn">
+                        <div className="tableSmallTitle">
+                            Statistics
+                        </div>
+
                         <OverallTable
                             values={this.state.overalltables[2].values}
                             bgColors={this.state.overalltables[2].bgColors}

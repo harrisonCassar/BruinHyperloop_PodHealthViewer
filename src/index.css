@@ -1,19 +1,19 @@
 .parent {
     width:100%;
-    border:0px solid red; /*for debugging purposes, change to 1px solid red */
+    border:1px solid red; /*for debugging purposes, change to 1px solid red */
     margin:10px;
 }
 
 .labelcolumn {
   float: left;
   width: 16%;
-  border: 0px solid red;
+  border: 1px solid lightgreen;
 }
 
 .pagecolumn {
   float:left;
   width:42%;
-  border: 0px solid red;
+  border: 1px solid blue;
 }
 
 .labeltable {
@@ -41,6 +41,13 @@ div.tableTitle {
   text-align: center;
   font-size: 125%;
   text-decoration: underline;
+  text-shadow: 2px 2px 0px #000;
+  color: #FFFFFF;
+}
+
+div.tableSmallTitle {
+  text-align: center;
+  font-size: 110%;
   text-shadow: 2px 2px 0px #000;
   color: #FFFFFF;
 }
