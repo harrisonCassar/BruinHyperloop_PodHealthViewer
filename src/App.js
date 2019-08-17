@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Table, OverallTable, LabelTable} from './Table';
+import hyperloop_logo from './hyperloop_logo.png';
+import TI_logo from './TI_logo.png';
 
 var tableNumbers = {
     "B1": 0,
@@ -198,25 +200,33 @@ class App extends Component {
 
     //handleSubmit function used by button as a functionality test method for the updateValue function
     handleSubmit(event) {
-        updateValue("B1_Voltage_Actual",30);
+        alert("ALERT!");
     }
 
     render() {
         return (
-            <div className="container">
-            	<br />
-                <br />
-            	<div className="title">
-                    Bruin Hyperloop Web Dashboard 
-                </div>
-                <br />
-                <br />
+            <div class="full-container">
+                <table class="container">
+                    <div class="logocolumn">
+                        <img src={hyperloop_logo} alt="Bruin Hyperloop"  width="348" height="80" />
+                    </div>
 
-                <div className="tableTitle">
+                    <div class="titlecolumn">
+                        <div class="title">
+                            Bruin Hyperloop Web Dashboard 
+                        </div>
+                    </div>
+
+                    <div class="logocolumn">
+                        <img src={TI_logo} alt="Texas Instruments" width="220" height="66" />
+                    </div>
+                </table>
+
+                <div class="tableTitle">
                     Battery
                 </div>
 
-                <table class="parent">
+                <table class="container">
                     <div class="labelcolumn">
                         <br />
                         <LabelTable
@@ -233,9 +243,7 @@ class App extends Component {
                     </div>
 
                     <div class="pagecolumn">
-
                         <br />
-
                         <Table
                         tableLabel={this.state.livetables[0].tableLabel}
                         minValues={this.state.livetables[0].minValues}
@@ -256,7 +264,7 @@ class App extends Component {
                     </div>
 
                     <div class="pagecolumn">
-                        <div className="tableSmallTitle">
+                        <div class="tableSmallTitle">
                             Statistics
                         </div>
 
@@ -276,11 +284,11 @@ class App extends Component {
 
                 <br />
 
-                <div className="tableTitle">
+                <div class="tableTitle">
                     Pod
                 </div>
 
-                <table class="parent">
+                <table class="container">
                     <div class="labelcolumn">
                         <br />
 
@@ -304,7 +312,7 @@ class App extends Component {
                         />
                     </div>
                     <div class="pagecolumn">
-                        <div className="tableSmallTitle">
+                        <div class="tableSmallTitle">
                             Statistics
                         </div>
 
@@ -315,6 +323,27 @@ class App extends Component {
                         />
                     </div>
                 </table>
+
+                <br />
+
+                <table class="container" height="140px">
+                    <div class="killButtonColumn">
+                        <button class="killButton" onClick={(i) => this.handleSubmit()}>KILL SWITCH</button>
+                    </div>
+
+                    <div class="statsButtonColumn">
+                        <div class="statsButtonContainer">
+                            <button class="clearStatsButton" onClick={(i) => this.handleSubmit()}>Clear Statistics</button>
+                        </div>
+
+                        <div class="statsButtonContainer">
+                            <button class="downloadLogsButton" onClick={(i) => this.handleSubmit()}>Download Logs</button>
+                        </div>
+                    </div>
+                    
+                </table>
+
+                
             </div>
         );
     }

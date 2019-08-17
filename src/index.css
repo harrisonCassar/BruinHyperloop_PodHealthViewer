@@ -1,3 +1,13 @@
+html {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.2rem; }
+
+body {
+  color: #404040;
+  background-image: radial-gradient(circle, #2471A3, #1F618D, #1A5276, #154360);
+  font-size: 1rem; }
+
 table {
   border-collapse: collapse;
   margin-left: auto;
@@ -7,10 +17,51 @@ table {
   max-width: 100%;
 }
 
-.parent {
-    width: 80%;
-    margin: 0 auto;
-    border: 0px solid red; /*for debugging purposes, change to 1px solid red */
+.full-container {
+  width: 100%;
+  margin: 0 auto;
+  border: 0px solid yellow; /*for debugging purposes, change to 1px solid red */
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0px solid red; /*for debugging purposes, change to 1px solid red */
+}
+
+.statsButtonContainer {
+  width: 100%;
+  height: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px solid red; /*for debugging purposes, change to 1px solid red */
+}
+
+/* Formatting columns
+  =============== */
+
+.logocolumn {
+  width: 30%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px solid lightgreen; /*for debugging purposes, change to 1px solid lightgreen */
+}
+
+.titlecolumn {
+  float: left;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  border: 0px solid lightgreen; /*for debugging purposes, change to 1px solid lightgreen */
 }
 
 .labelcolumn {
@@ -25,14 +76,31 @@ table {
   border: 0px solid blue; /*for debugging purposes, change to 1px solid blue */
 }
 
-.labeltable {
-  width: 90%;
+.killButtonColumn {
+  float: left;
+  width: 58%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px solid magenta; /*for debugging purposes, change to 1px solid blue */
 }
 
-.livetable {
-  width: 90%;
+.statsButtonColumn {
+  float: left;
+  width: 42%;
+  height: 100%;
+  align-content: flex-end;
+  justify-content: center;
+  margin: 0 auto;
+  border: 0px solid white; /*for debugging purposes, change to 1px solid blue */
 }
 
+/* Visible Tables
+  =============== */
+
+.labeltable,
+.livetable,
 .overalltable {
   width: 90%;
 }
@@ -50,7 +118,7 @@ div.tableTitle {
   text-align: center;
   font-size: 125%;
   text-decoration: underline;
-  text-shadow: 2px 2px 0px #000;
+  text-shadow: 1px 1px 0px #000;
   color: #FFFFFF;
 }
 
@@ -88,29 +156,6 @@ td.othercol {
 body {
   margin: 0; }
 
-/* Reset
-  =============== */
-html {
-  box-sizing: border-box; }
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit; }
-
-/* Scaffolding
-  =============== */
-
-html {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.2rem; }
-
-body {
-  color: #404040;
-  background-image: radial-gradient(circle, #2471A3, #1F618D, #1A5276, #154360);
-  font-size: 1rem; }
-
 thead th {
   border-bottom: 2px solid #dedede; }
 
@@ -126,25 +171,67 @@ td {
   padding: 0rem;
   border: 1px solid rgb(190, 190, 190); }
 
-/* Container classes (for later potential use)
+/* Button Formatting
   =============== */
-/*
-.full-container {
-  max-width: 100%;
-  padding: 0 1rem; }
 
-.container, .small-container, .medium-container {
-  max-width: 1200px;
-  padding: 0 1rem;
-  margin-left: auto;
-  margin-right: auto; }
+.killButton {
+  width: 92%;
+  height: 90%;
+  border: none;
+  background-color: #f02c1d;
+  color: white;
+  font-size: 70px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
 
-.small-container {
-  max-width: 800px; }
+.clearStatsButton {
+  width: 90%;
+  height: 80%;
+  border: none;
+  background-color: #8c8c8c;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
 
-.medium-container {
-  max-width: 1000px; }
+.downloadLogsButton {
+  width: 90%;
+  height: 80%;
+  border: none;
+  background-color: #8c8c8c;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
 
-.content-section {
-  padding: 30px 0; }
-*/
+.killButton:hover {
+  background-color: #ff5347;
+  color:black;
+}
+
+.clearStatsButton:hover {
+  background-color: #e3e3e3;
+  color:black;
+}
+
+.downloadLogsButton:hover {
+  background-color: #e3e3e3;
+  color:black;
+}
+
+/* Reset
+  =============== */
+
+html {
+  box-sizing: border-box; }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; }
