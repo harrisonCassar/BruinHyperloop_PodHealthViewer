@@ -210,6 +210,7 @@ class App extends Component {
                     Bruin Hyperloop Web Dashboard 
                 </div>
                 <br />
+                <br />
 
                 <div className="tableTitle">
                     Battery
