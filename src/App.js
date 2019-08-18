@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Table, OverallTable, LabelTable} from './Table';
-import openSocket from 'socket.io-client';
+/*import openSocket from 'socket.io-client';*/
 import hyperloop_logo from './hyperloop_logo.png';
 import TI_logo from './TI_logo.png';
 
@@ -59,8 +59,8 @@ class App extends Component {
         super(props);
         window.appComponent = this;
         this.state = {
-            socket: openSocket('http://localhost:1337'),
-            data: null,
+            /*socket: openSocket('http://localhost:1337'),
+            data: null,*/
 
             //each index of tables array indicates different table
             //array indexes correspond to data's row numbers from 0 to n-1 rows
