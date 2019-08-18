@@ -154,6 +154,9 @@ class App extends Component {
                 }
             ],
         };
+        /*this.state.socket.on('socket_data', d => { 
+            updateValue(d)
+        });*/
     }
 
     updateCell(tableString,newValue)
