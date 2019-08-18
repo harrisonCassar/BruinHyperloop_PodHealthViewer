@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Table, OverallTable, LabelTable} from './Table';
+import openSocket from 'socket.io-client';
 import hyperloop_logo from './hyperloop_logo.png';
 import TI_logo from './TI_logo.png';
 
@@ -27,9 +28,13 @@ var columnNumbers = {
 };
 
 //tableNum and rowNum starts at index 0
-function updateValue(tableString,newValue)
+function updateValue(d)
 {
-    window.appComponent.updateCell(tableString,newValue);
+    var data = d.toString();
+    var val_name = data.split(':')[0];
+    var val = parseFloat(data.split(':')[1]);
+
+    window.appComponent.updateCell(val_name, val);
 }
 
 //onClick functionalities for custom buttons
@@ -53,6 +58,8 @@ class App extends Component {
         super(props);
         window.appComponent = this;
         this.state = {
+            socket: openSocket('http://localhost:1337'),
+            data: null,
 
             //each index of tables array indicates different table
             //array indexes correspond to data's row numbers from 0 to n-1 rows
@@ -209,6 +216,7 @@ class App extends Component {
         }
         else
         {
+            console.log(newValue);
             updatedState.overalltables[tableNum].values[columnNum][rowNum] = newValue;
         }
 
