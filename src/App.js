@@ -14,7 +14,8 @@ var tableNumbers = {
 var rowNumbers = {
     "Voltage": 0,
     "Current": 1,
-    "Temp": 2,
+    "bTemp": 2,
+    "pTemp": 0,
     "M1": 0,
     "M2": 1,
     "M3": 2,
@@ -153,6 +154,9 @@ class App extends Component {
                 }
             ],
         };
+        this.state.socket.on('socket_data', d => { 
+            updateValue(d)
+        });
     }
 
     updateCell(tableString,newValue)
