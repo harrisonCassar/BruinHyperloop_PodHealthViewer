@@ -1,3 +1,8 @@
+
+For the purposes of contiuining this project, please reference this: https://hackernoon.com/how-to-combine-a-nodejs-back-end-with-a-reactjs-front-end-app-ea9b24715032
+
+=================================================================================================================
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
